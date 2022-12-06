@@ -119,11 +119,11 @@
 								<img src="${item1.image}" class="recent-thumb" alt="">
 								<h2>
 									<a
-										href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item1.ID}">${item1.name}</a>
+										href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item1.id}">${item1.name}</a>
 								</h2>
 								<div class="product-sidebar-price">
-									<ins>${item1.price}</ins>
-									<del>${item1.priceDel}</del>
+									<ins>${item1.cost}</ins>
+									<del>${item1.cost}</del>
 								</div>
 							</div>
 						</c:forEach>
@@ -135,7 +135,7 @@
 							<c:forEach var="item" items="${ACTIVE_PRODUCT_LIST}" begin='0'
 								end='5'>
 								<li><a
-									href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item.ID}">${item.name}</a></li>
+									href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item.id}">${item.name}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -247,7 +247,7 @@
 										<c:forEach var="i" items="${PHONECASE_ACTIVE_PRODUCT_LIST}"
 											begin='0' end='1'>
 											<li class="product"><a
-												href="<%=request.getContextPath()%>/MainController?action=AddPhonecase&ID=${i.pcID}">
+												href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=${i.id}">
 													<img width="325" height="325" alt="T_4_front"
 													class="attachment-shop_catalog wp-post-image"
 													src="${i.image }">
@@ -255,7 +255,7 @@
 														class="amount"> </span></span>
 											</a> <a class="add_to_cart_button" data-quantity="1"
 												data-product_sku="" data-product_id="22" rel="nofollow"
-												href="<%=request.getContextPath()%>/MainController?action=AddPhonecase&ID=${i.pcID}">Select
+												href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=${i.id}">Select
 													options</a></li>
 										</c:forEach>
 										<a>&nbsp;</a>

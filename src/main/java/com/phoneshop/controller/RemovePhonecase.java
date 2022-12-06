@@ -50,20 +50,20 @@ public class RemovePhonecase extends HttpServlet {
         try {
             String ID = request.getParameter("ID");
             int quantity = 1;
-            
-            PhonecaseDAO dao = new PhonecaseDAO();
-            PhonecaseDTO phone = dao.getProductForCart(ID);
-            
-            LineItem lineItem = new LineItem(phone, quantity);
-            
-            HttpSession session = request.getSession();
-            Cart cart = (Cart) session.getAttribute("CART");
-             
-            cart.removePhonecase(lineItem);
-            
-            session.setAttribute("CART", cart);
-            url = SUCCESS;
-            
+//            
+//            PhonecaseDAO dao = new PhonecaseDAO();
+//            PhonecaseDTO phone = dao.getProductForCart(ID);
+//            
+//            LineItem lineItem = new LineItem(phone, quantity);
+//            
+//            HttpSession session = request.getSession();
+//            Cart cart = (Cart) session.getAttribute("CART");
+//             
+//            cart.removePhonecase(lineItem);
+//            
+//            session.setAttribute("CART", cart);
+//            url = SUCCESS;
+//            
         } 
         catch (Exception e) {
         }

@@ -1,6 +1,7 @@
 package com.phoneshop.dao;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +10,7 @@ import org.hibernate.query.Query;
 
 import com.phoneshop.entities.ProductEntity;
 import com.phoneshop.enums.ProductType;
+import com.phoneshop.phones.PhoneDTO;
 import com.phoneshop.utils.HibernateUtility;
 public class ProductDAO {
 	
@@ -56,7 +58,7 @@ public class ProductDAO {
 	      // Error Could not resolve root entity, Cannot resolve symbol 'Product Entity'
 	      // --> change version or use "jakarta.persistence" for version hibernate > 6.
 	      // https://stackoverflow.com/questions/43716068/invalid-syntax-error-type-myisam-in-ddl-generated-by-hibernate
-	      Query<ProductEntity> query = session.createQuery("SELECT phone FROM ProductEntity phone WHERE phone.type LIKE :product_type", ProductEntity.class);
+	      Query<ProductEntity> query = session.createQuery("SELECT phone FROM ProductEntity phone WHERE phone.type = :product_type", ProductEntity.class);
 	      query.setParameter("product_type", type);
 	      products = query.list();
 	      return products;
@@ -263,6 +265,14 @@ public class ProductDAO {
 
 
 	  public static void main(String[] args) {
+		  
+		  ProductDAO dao = new ProductDAO();
+		  List<PhoneDTO> productList = dao.getListProductByType(ProductType.PHONE).stream().map(product -> new PhoneDTO(product))
+					.collect(Collectors.toList());
+		  for (PhoneDTO phone : productList) {
+			  System.out.println(phone.getName());
+		  }
+		  
 			/*
 			 * ProductDAO productDAO = new ProductDAO(); ProductEntity phone1 = new
 			 * ProductEntity("Realme 8 Pro", 6990000, true); ProductEntity phoncase1 = new

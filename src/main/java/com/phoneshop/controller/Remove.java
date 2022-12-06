@@ -52,15 +52,15 @@ public class Remove extends HttpServlet {
             PhoneDAO dao = new PhoneDAO();
             PhoneDTO phone = dao.getProductForCart(ID);
             
-            LineItem lineItem = new LineItem(phone, quantity);
-            
-            HttpSession session = request.getSession();
-            Cart cart = (Cart) session.getAttribute("CART");
-             
-            cart.removeItem(lineItem);
-            
-            session.setAttribute("CART", cart);
-            url = SUCCESS;
+//            LineItem lineItem = new LineItem(phone, quantity);
+//            
+//            HttpSession session = request.getSession();
+//            Cart cart = (Cart) session.getAttribute("CART");
+//             
+//            cart.removeItem(lineItem);
+//            
+//            session.setAttribute("CART", cart);
+//            url = SUCCESS;
             
         } 
         catch (Exception e) {

@@ -65,12 +65,12 @@ public class SendMail {
             
             content = content + "Address: "+ address +"\n";
             String listLineItem ="";
-            for (LineItem lineitem: cart.getLineItems()) {
-            	if (lineitem.getPhoneDTO() != null) {
-            		listLineItem = listLineItem + "Name: " +lineitem.getPhoneDTO().getName() + "---- quantity: "+ lineitem.getQuantity() + "\n";
-            	}
-            	
-            }
+//            for (LineItem lineitem: cart.getLineItems()) {
+//            	if (lineitem.getPhoneDTO() != null) {
+//            		listLineItem = listLineItem + "Name: " +lineitem.getPhoneDTO().getName() + "---- quantity: "+ lineitem.getQuantity() + "\n";
+//            	}
+//            	
+//            }
             content = content + listLineItem;
             //message.setText(from, host);
             // Now set the actual message

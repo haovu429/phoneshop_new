@@ -62,20 +62,20 @@ public class AddPhonecase extends HttpServlet {
             	int quantity = 1;
                 
                 
-                PhonecaseDTO phonecase = pcdao.getAllPhonecasebyID(ID);
-                LineItem linePC = new LineItem(phonecase, quantity);
-                
-                HttpSession session = request.getSession();
-                Cart cart = (Cart) session.getAttribute("CART");
-
-                
-                if (cart == null) {
-                	cart = new Cart();
-                }         
-                
-                cart.addPhonecase(linePC);   
-                session.setAttribute("CART", cart);
-                url = SUCCESS;
+//                PhonecaseDTO phonecase = pcdao.getAllPhonecasebyID(ID);
+//                LineItem linePC = new LineItem(phonecase, quantity);
+//                
+//                HttpSession session = request.getSession();
+//                Cart cart = (Cart) session.getAttribute("CART");
+//
+//                
+//                if (cart == null) {
+//                	cart = new Cart();
+//                }         
+//                
+//                cart.addPhonecase(linePC);   
+//                session.setAttribute("CART", cart);
+//                url = SUCCESS;
 			}
             
         } 

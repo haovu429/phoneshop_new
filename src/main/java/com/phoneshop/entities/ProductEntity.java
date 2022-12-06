@@ -75,6 +75,7 @@ public class ProductEntity {
 	@Column(name = "modify_date")
 	private Date modifyDate;
 
+	@Column(name = "type", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private ProductType type;
 
