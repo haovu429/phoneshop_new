@@ -53,6 +53,8 @@ public class PhoneDTO {
         this.typeID = 1;
         this.quantity = productEntity.getQuantity();
     }
+    
+    
 
     public String getID() {
         return ID;

@@ -3,6 +3,7 @@ package com.phoneshop.controller;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.phoneshop.dao.ProductDAO;
+import com.phoneshop.entities.ProductEntity;
+import com.phoneshop.enums.ProductType;
 import com.phoneshop.phonecase.PhonecaseDAO;
 import com.phoneshop.phonecase.PhonecaseDTO;
 import com.phoneshop.phones.PhoneDAO;
@@ -54,9 +58,11 @@ public class AddToCart extends HttpServlet {
         String url = "/cart.jsp";
         try {
             String ID = request.getParameter("ID");
-            PhoneDAO dao = new PhoneDAO();
-            PhoneDTO phone = dao.getProductForCart(ID);
-            List<PhoneDTO> productList = dao.getAllPhone();
+            String productType = request.getParameter("type");
+            ProductDAO dao = new ProductDAO();
+			List<ProductEntity> productList = dao.getListProductByType(ProductType.PHONE);
+			ProductEntity phone = dao.getProductById(Long.valueOf(ID));
+
             if (!productList.isEmpty()) {             
                 request.setAttribute("ACTIVE_PRODUCT_LIST", productList);
                 }
@@ -74,11 +80,9 @@ public class AddToCart extends HttpServlet {
       
                 cart.addItem(lineItem);
                 
-                PhonecaseDAO pcdao = new PhonecaseDAO();
-                List<PhonecaseDTO> phonecaseList = pcdao.getAllPhonecase(ID);
-                for (PhonecaseDTO phonecaseDTO: phonecaseList){
-                    System.out.println(phonecaseDTO.getImage());
-                }
+                List<ProductEntity> phonecaseList = dao.getListProductByTypeWithPhoneId(ProductType.PHONECASE, phone.getId());
+                
+                
                 
                 request.setAttribute("PHONECASE_ACTIVE_PRODUCT_LIST", phonecaseList);
                 session.setAttribute("CART", cart);

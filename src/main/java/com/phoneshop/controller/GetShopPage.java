@@ -1,10 +1,14 @@
 
 package com.phoneshop.controller;
+import com.phoneshop.dao.ProductDAO;
+import com.phoneshop.enums.ProductType;
 import com.phoneshop.phones.PhoneDAO;
 import com.phoneshop.phones.PhoneDTO;
 import com.phoneshop.phones.Type;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,13 +25,13 @@ public class GetShopPage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = "404.html";
         try {
-            PhoneDAO dao = new PhoneDAO();
-            List<PhoneDTO> productList = dao.getAllPhone();
-            List<Type> typeList = dao.getType();
-            
+        	ProductDAO dao = new ProductDAO();
+			List<PhoneDTO> productList = dao.getListProductByType(ProductType.PHONE).stream().map(product -> new PhoneDTO(product))
+					.collect(Collectors.toList());
+
             if (!productList.isEmpty()) {
                 request.setAttribute("ACTIVE_PRODUCT_LIST", productList);
-                request.setAttribute("TYPE_LIST", typeList);
+
                 url = SUCCESS;
             }
         } 

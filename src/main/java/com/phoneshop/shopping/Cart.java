@@ -1,8 +1,12 @@
 package com.phoneshop.shopping;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+import com.phoneshop.entities.ProductEntity;
+import com.phoneshop.enums.ProductType;
 
 public class Cart {
 	Set<LineItem> lineItems = new HashSet<>();
@@ -30,64 +34,21 @@ public class Cart {
 		this.lineItems = lineItems;
 		calculateTotalPrice();
 	}
-	
+
 	boolean existGlobal = false;
 
 	public void addItem(LineItem newLineItem) {
-		boolean exist = false; 
-		for (LineItem line1 : lineItems) {
-			if (newLineItem.getPhoneDTO() != null) {
-				if (line1.getPhoneDTO() != null) {
-					if (line1.getPhoneDTO().getID().equals(newLineItem.getPhoneDTO().getID())) {
-						line1.setQuantity(line1.getQuantity() + newLineItem.getQuantity());
-						exist = true;
-						break;
-					}
-				}
-
-			} else {
-				if (line1.getPhonecaseDTO() != null) {
-					if (line1.getPhonecaseDTO().getPcID().equals(newLineItem.getPhonecaseDTO().getPcID())) {
-						line1.setQuantity(1);
-						exist = true;
-						break;
-					}
-				}
-
-			}
-
-		}
-		if (!exist) {
-			lineItems.add(newLineItem);
-		}
-
-		calculateTotalPrice();
-	}
-
-	public void addPhonecase(LineItem newLineItem) {
 		boolean exist = false;
 		for (LineItem line1 : lineItems) {
-			if (newLineItem.getPhoneDTO() != null) {
-				if (line1.getPhoneDTO() != null) {
-					if (line1.getPhoneDTO().getID().equals(newLineItem.getPhoneDTO().getID())) {
+			if (newLineItem.getProduct() != null) {
+				if (line1.getProduct() != null) {
+					if (line1.getProduct().getId() == (newLineItem.getProduct().getId())) {
 						line1.setQuantity(line1.getQuantity() + newLineItem.getQuantity());
 						exist = true;
 						break;
 					}
 				}
-
-			} else {
-				if (line1.getPhonecaseDTO() != null) {
-					if (line1.getPhonecaseDTO().getPcID().equals(newLineItem.getPhonecaseDTO().getPcID())) {
-						line1.setQuantity(1);
-						exist = true;
-						existGlobal = true;
-						break;
-					}
-				}
-
 			}
-
 		}
 		if (!exist) {
 			lineItems.add(newLineItem);
@@ -96,67 +57,77 @@ public class Cart {
 		calculateTotalPrice();
 	}
 
-	public void removeItem(LineItem newLineItem) {
-		for (LineItem line1 : lineItems) {
-			if (newLineItem.getPhoneDTO() != null) {
-				if (line1.getPhoneDTO() != null) {
-					if (line1.getPhoneDTO().getID().equals(newLineItem.getPhoneDTO().getID())) {
-						lineItems.remove(line1);
-						break;
-					}
-				}
+	/*
+	 * public void addPhonecase(LineItem newLineItem) { boolean exist = false; for
+	 * (LineItem line1 : lineItems) { if (newLineItem.getPhoneDTO() != null) { if
+	 * (line1.getPhoneDTO() != null) { if
+	 * (line1.getPhoneDTO().getID().equals(newLineItem.getPhoneDTO().getID())) {
+	 * line1.setQuantity(line1.getQuantity() + newLineItem.getQuantity()); exist =
+	 * true; break; } }
+	 * 
+	 * } else { if (line1.getPhonecaseDTO() != null) { if
+	 * (line1.getPhonecaseDTO().getPcID().equals(newLineItem.getPhonecaseDTO().
+	 * getPcID())) { line1.setQuantity(1); exist = true; existGlobal = true; break;
+	 * } }
+	 * 
+	 * }
+	 * 
+	 * } if (!exist) { lineItems.add(newLineItem); }
+	 * 
+	 * calculateTotalPrice(); }
+	 */
 
-			} else {
-				if (line1.getPhonecaseDTO() != null) {
-					if (line1.getPhonecaseDTO().getPcID().equals(newLineItem.getPhonecaseDTO().getPcID())) {
-						lineItems.remove(line1);
-						break;
+	public void removeItem(long phoneId) {
+		for (LineItem lineItem : lineItems) {
+			if (lineItem.getProduct() != null) {
+				if (lineItem.getProduct().getId() == phoneId) {
+					if (lineItem.getProduct().getType().equals(ProductType.PHONE)) {
+						for (LineItem lineItem2 : lineItems) {
+							ProductEntity phone = lineItem2.getProduct().getPhone();
+							if (phone != null && phone.getId() == lineItem.getProduct().getId()) {
+								removeItem(lineItem2.getProduct().getId());
+							}
+						}
 					}
-				}
 
+					lineItems.remove(lineItem);
+					break;
+				}
 			}
 
 		}
-		if (!existGlobal) {
-			lineItems.removeAll(lineItems);
-		}
-		
-
 		calculateTotalPrice();
+	}
+
+	public void removePhoncasebyPhone() {
 
 	}
 
-	public void removePhonecase(LineItem newLineItem) {
-		for (LineItem line1 : lineItems) {
-			if (newLineItem.getPhoneDTO() != null) {
-				if (line1.getPhoneDTO() != null) {
-					if (line1.getPhoneDTO().getID().equals(newLineItem.getPhoneDTO().getID())) {
-						lineItems.remove(line1);
-						break;
-					}
-				}
-
-			} else {
-				if (line1.getPhonecaseDTO() != null) {
-					if (line1.getPhonecaseDTO().getPcID().equals(newLineItem.getPhonecaseDTO().getPcID())) {
-						lineItems.remove(line1);
-						break;
-					}
-				}
-
-			}
-
-		}
-
-		calculateTotalPrice();
-
-	}
+	/*
+	 * public void removePhonecase(LineItem newLineItem) { for (LineItem line1 :
+	 * lineItems) { if (newLineItem.getPhoneDTO() != null) { if (line1.getPhoneDTO()
+	 * != null) { if
+	 * (line1.getPhoneDTO().getID().equals(newLineItem.getPhoneDTO().getID())) {
+	 * lineItems.remove(line1); break; } }
+	 * 
+	 * } else { if (line1.getPhonecaseDTO() != null) { if
+	 * (line1.getPhonecaseDTO().getPcID().equals(newLineItem.getPhonecaseDTO().
+	 * getPcID())) { lineItems.remove(line1); break; } }
+	 * 
+	 * }
+	 * 
+	 * }
+	 * 
+	 * calculateTotalPrice();
+	 * 
+	 * }
+	 */
 
 	public void calculateTotalPrice() {
 		totalPrice = 0;
 		for (LineItem lineItem : lineItems) {
-			if (lineItem.getPhoneDTO() != null) {
-				totalPrice = totalPrice + lineItem.getPhoneDTO().getPrice() * lineItem.getQuantity();
+			if (lineItem.getProduct() != null) {
+				totalPrice = totalPrice + lineItem.getProduct().getCost() * lineItem.getQuantity();
 			}
 		}
 	}

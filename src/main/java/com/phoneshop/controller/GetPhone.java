@@ -6,6 +6,7 @@
 package com.phoneshop.controller;
 
 import com.phoneshop.dao.ProductDAO;
+import com.phoneshop.enums.ProductType;
 import com.phoneshop.phones.PhoneDAO;
 import com.phoneshop.phones.PhoneDTO;
 import com.phoneshop.phones.Type;
@@ -13,7 +14,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import com.phoneshop.enums.ProductType;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,7 @@ public class GetPhone extends HttpServlet {
 		try {
 			// PhoneDAO dao = new PhoneDAO();
 			ProductDAO dao = new ProductDAO();
-			List<PhoneDTO> productList = dao.getListProduct().stream().map(product -> new PhoneDTO(product))
+			List<PhoneDTO> productList = dao.getListProductByType(ProductType.PHONE).stream().map(product -> new PhoneDTO(product))
 					.collect(Collectors.toList());
 
 			if (!productList.isEmpty()) {

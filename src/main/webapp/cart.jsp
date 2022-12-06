@@ -160,42 +160,42 @@
 										<c:forEach var="item" items="${CART.lineItems}">
 											<tr class="cart_item">
 												<c:set var="k" value="${item}" />
-												<c:choose>
-													<c:when test="${not empty k.phoneDTO}">
+												<%-- <c:choose> --%>
+													<%-- <c:when test="${k.product.type == 'PHONE'}"> --%>
 														<td class="product-remove"><a
 															title="Remove this item" class="remove"
-															href="<%=request.getContextPath()%>/MainController?action=Remove&ID=${k.phoneDTO.ID}">Remove</a></td>
+															href="<%=request.getContextPath()%>/MainController?action=Remove&ID=${k.product.id}">Remove</a></td>
 
 														<td class="product-thumbnail"><a
-															href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${k.phoneDTO.ID}"><img
+															href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${k.product.id}"><img
 																width="145" height="145" alt="poster_1_up"
-																class="shop_thumbnail" src="${k.phoneDTO.image}"></a></td>
+																class="shop_thumbnail" src="${k.product.image}"></a></td>
 
 														<td class="product-name"><a
-															href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${k.phoneDTO.ID}">${k.phoneDTO.name}</a></td>
+															href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${k.product.id}">${k.product.name}</a></td>
 
-														<td class="product-price"><span class="amount">${k.phoneDTO.price}</span>
+														<td class="product-price"><span class="amount">${k.product.cost}</span>
 														</td>
 
-													</c:when>
-													<c:otherwise>
-														<td class="product-remove"><a
+													<%-- </c:when>
+													<c:otherwise> --%>
+														<%-- <td class="product-remove"><a
 															title="Remove this item" class="remove"
-															href="<%=request.getContextPath()%>/MainController?action=RemovePhonecase&ID=${k.phonecaseDTO.pcID}">Remove</a></td>
+															href="<%=request.getContextPath()%>/MainController?action=RemovePhonecase&ID=${k.product.id}">Remove</a></td>
 
 														<td class="product-thumbnail">
 														<a href="#">
 														<img	width="145" height="145" alt="poster_1_up"
-																class="shop_thumbnail" src="${k.phonecaseDTO.image}">
+																class="shop_thumbnail" src="${k.product.image}">
 																</a></td>
 
 														<td class="product-name"><a href="#">Phonecase</a></td>
 
-														<td class="product-price"><span class="amount">${k.phonecaseDTO.price}</span>
-														</td>
-													</c:otherwise>
+														<td class="product-price"><span class="amount">${k.product.cost}</span>
+														</td> --%>
+													<%-- </c:otherwise>
 
-												</c:choose>
+												</c:choose> --%>
 												<td class="product-quantity">
 													<div class="quantity buttons_added">
 														<input type="button" class="minus" value="-"> <input

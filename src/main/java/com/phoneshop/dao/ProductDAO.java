@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.phoneshop.entities.ProductEntity;
+import com.phoneshop.enums.ProductType;
 import com.phoneshop.utils.HibernateUtility;
 public class ProductDAO {
 	
@@ -42,6 +43,71 @@ public class ProductDAO {
 	    }
 	    return null;
 	  }
+	  
+	  
+	  public List<ProductEntity> getListProductByType(ProductType type)
+	  {
+	    Transaction transaction = null;
+	    List<ProductEntity> products = null;
+	    Session session = factory.openSession();
+	    try
+	    {
+	      transaction = session.beginTransaction();
+	      // Error Could not resolve root entity, Cannot resolve symbol 'Product Entity'
+	      // --> change version or use "jakarta.persistence" for version hibernate > 6.
+	      // https://stackoverflow.com/questions/43716068/invalid-syntax-error-type-myisam-in-ddl-generated-by-hibernate
+	      Query<ProductEntity> query = session.createQuery("SELECT phone FROM ProductEntity phone WHERE phone.type LIKE :product_type", ProductEntity.class);
+	      query.setParameter("product_type", type);
+	      products = query.list();
+	      return products;
+	    }
+	    catch (Exception e)
+	    {
+	      if (transaction != null)
+	      {
+	        transaction.rollback();
+	      }
+	      e.printStackTrace();
+	    }
+	    finally
+	    {
+	      session.close();
+	    }
+	    return null;
+	  }
+	  
+	  public List<ProductEntity> getListProductByTypeWithPhoneId(ProductType type, long phoneId)
+	  {
+	    Transaction transaction = null;
+	    List<ProductEntity> products = null;
+	    Session session = factory.openSession();
+	    try
+	    {
+	      transaction = session.beginTransaction();
+	      // Error Could not resolve root entity, Cannot resolve symbol 'Product Entity'
+	      // --> change version or use "jakarta.persistence" for version hibernate > 6.
+	      // https://stackoverflow.com/questions/43716068/invalid-syntax-error-type-myisam-in-ddl-generated-by-hibernate
+	      Query<ProductEntity> query = session.createQuery("SELECT product FROM ProductEntity product WHERE product.type LIKE :product_type AND product.phone.id = :phoneid", ProductEntity.class);
+	      query.setParameter("product_type", type);
+	      query.setParameter("phoneid", phoneId);
+	      products = query.list();
+	      return products;
+	    }
+	    catch (Exception e)
+	    {
+	      if (transaction != null)
+	      {
+	        transaction.rollback();
+	      }
+	      e.printStackTrace();
+	    }
+	    finally
+	    {
+	      session.close();
+	    }
+	    return null;
+	  }
+
 
 	  public void updateProduct(ProductEntity product) {
 	    Transaction transaction = null;
@@ -72,7 +138,7 @@ public class ProductDAO {
 	    return;
 	  }
 
-	  public void insertProduct(ProductEntity product) {
+	  public static void insertProduct(ProductEntity product) {
 	    Transaction transaction = null;
 	    Session session = factory.openSession();
 	    try
@@ -197,10 +263,16 @@ public class ProductDAO {
 
 
 	  public static void main(String[] args) {
-	    ProductDAO productDAO = new ProductDAO();
-	    List<ProductEntity> products = productDAO.getListProduct();
-	    for (ProductEntity product : products) {
-	      System.out.println(product);
-	    }
+			/*
+			 * ProductDAO productDAO = new ProductDAO(); ProductEntity phone1 = new
+			 * ProductEntity("Realme 8 Pro", 6990000, true); ProductEntity phoncase1 = new
+			 * ProductEntity("Red for Realme 8 Pro", 0, true); phoncase1.setPhone(phone1);
+			 * insertProduct(phoncase1);
+			 */
+	    System.out.println("Done");
+		/*
+		 * List<ProductEntity> products = productDAO.getListProduct(); for
+		 * (ProductEntity product : products) { System.out.println(product); }
+		 */
 	  }
 }
