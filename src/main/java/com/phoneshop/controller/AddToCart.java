@@ -66,7 +66,7 @@ public class AddToCart extends HttpServlet {
 			String action = request.getParameter("action");
 			String ID = request.getParameter("ID");
 			String productType = request.getParameter("type");
-			
+
 			ProductDAO dao = new ProductDAO();
 			List<ProductEntity> productList = dao.getListProductByType(ProductType.PHONE);
 			ProductEntity phone = dao.getProductById(Long.valueOf(ID));
@@ -89,8 +89,9 @@ public class AddToCart extends HttpServlet {
 
 				List<ProductEntity> phonecaseList = dao.getListProductByTypeWithPhoneId(ProductType.PHONECASE,
 						phone.getId());
-
+				List<ProductEntity> bestSeller = dao.bestPhoncaseSeller(Long.valueOf(ID));
 				request.setAttribute("PHONECASE_ACTIVE_PRODUCT_LIST", phonecaseList);
+				request.setAttribute("BEST_SELLER", bestSeller);
 				session.setAttribute("CART", cart);
 				url = SUCCESS;
 

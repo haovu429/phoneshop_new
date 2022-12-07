@@ -23,7 +23,7 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_CART = "UpdateCart";
     private static final String DELETE_CART = "Remove";
     private static final String DELETE_PHONECASE = "RemovePhonecase";
-    private static final String LOG_OUT = "LogoutController";
+    private static final String LOG_IN = "LoginController";
     private static final String GET_PRODUCT = "GetProductController";
     private static final String ADD_PRODUCT = "AddProductController";
     private static final String UPDATE_PRODUCT = "UpdateProductController";
@@ -67,11 +67,11 @@ public class MainController extends HttpServlet {
             else if ("Remove".equals(action)) {
                 url = DELETE_CART;
             }
+            else if ("LoginController".equals(action)) {
+                url = LOG_IN;
+            }
             else if ("RemovePhonecase".equals(action)) {
                 url = DELETE_PHONECASE;
-            }    
-            else if ("Logout".equals(action)) {
-                url = LOG_OUT;
             }    
             else if ("GetAllProduct".equals(action)) {
                 url = GET_PRODUCT;

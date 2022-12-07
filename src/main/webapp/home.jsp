@@ -120,8 +120,9 @@
 							Xiaomi <span class="primary">12 <strong>Pro</strong></span>
 						</h2>
 						<h4 class="caption subtitle">Master Every Scene.</h4>
-						<a class="caption button-radius" href="#"><span class="icon"></span>Shop
-							now</a>
+						<a class="caption button-radius"
+							href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=2"><span
+							class="icon"></span>Shop now</a>
 					</div></li>
 				<li><img src="img/h4-slide3.png" alt="Slide">
 					<div class="caption-group">
