@@ -1,7 +1,7 @@
 package com.phoneshop.enums;
 
 public enum ProductType {
-	PHONE("PHONE"), PHONECASE("PHONCASE");
+	PHONE("PHONE"), PHONECASE("PHONECASE");
 
 	private String code;
 

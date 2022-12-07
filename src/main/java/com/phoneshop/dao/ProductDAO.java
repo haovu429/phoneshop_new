@@ -224,8 +224,10 @@ public class ProductDAO {
 		try {
 			transaction = session.beginTransaction();
 			Query<ProductEntity> query = session.createQuery(
-					"SELECT p FROM ProductEntity p,(SELECT product.id AS pid, SUM (detail.quantity) AS amount FROM ProductEntity product, DetailOrderEntity detail WHERE product.type = 'PHONCASE' AND product.id = detail.productEntity.id GROUP BY product.id ORDER BY amount DESC) statistic WHERE p.id = statistic.pid",
+					"SELECT p FROM ProductEntity p WHERE p.id IN (SELECT product.id AS pid FROM ProductEntity product, DetailOrderEntity detail WHERE product.type = :product_type AND product.id = detail.productEntity.id GROUP BY product.id ORDER BY SUM(detail.quantity) DESC)",
 					ProductEntity.class);
+			query.setParameter("product_type", ProductType.PHONECASE);
+			query.setMaxResults(5);
 			productList = query.list();
 			return productList;
 		} catch (Exception e) {
@@ -239,7 +241,7 @@ public class ProductDAO {
 		return null;
 	}
 
-	public long bestPhoncaseSeller1() {
+	public List<ProductEntity> bestPhoncaseSeller1() {
 		Transaction transaction = null;
 		long productList = 0;
 		Session session = factory.openSession();
@@ -247,12 +249,13 @@ public class ProductDAO {
 			transaction = session.beginTransaction();
 			/*
 			 * Query<Long> query = session.createQuery(
-			 * "SELECT MAX (detail.quantity) AS amount FROM ProductEntity product, DetailOrderEntity detail WHERE product.type = 'PHONCASE' AND product.id = detail.productEntity.id GROUP BY product.id ORDER BY amount DESC"
+			 * "SELECT MAX (detail.quantity) AS amount FROM ProductEntity product, DetailOrderEntity detail WHERE product.type = :product_type AND product.id = detail.productEntity.id GROUP BY product.id ORDER BY amount DESC"
 			 * );
 			 */
-			String hql = "SELECT MAX (detail.quantity) AS amount FROM DetailOrderEntity detail ORDER BY amount DESC";
+			String hql = "SELECT p FROM ProductEntity p WHERE p.id IN (SELECT product.id AS pid FROM ProductEntity product, DetailOrderEntity detail WHERE product.type = :product_type AND product.id = detail.productEntity.id GROUP BY product.id ORDER BY SUM(detail.quantity) DESC)";
 			Query query = session.createQuery(hql);
-			int result = (int) query.uniqueResult();
+			query.setParameter("product_type", ProductType.PHONECASE);
+			List<ProductEntity> result = query.getResultList();
 			System.out.println("Rows affected: " + result);
 			return result;
 		} catch (Exception e) {
@@ -263,7 +266,7 @@ public class ProductDAO {
 		} finally {
 			session.close();
 		}
-		return 0;
+		return null;
 	}
 
 	public static void main(String[] args) {
@@ -282,11 +285,13 @@ public class ProductDAO {
 		 * insertProduct(phoncase1);
 		 */
 		ProductDAO dao = new ProductDAO();
-		/*
-		 * List<ProductEntity> list = dao.bestPhoncaseSeller(); for (ProductEntity pro :
-		 * list) { System.out.println(pro.getName()); }
-		 */
-		dao.bestPhoncaseSeller1();
+
+		List<ProductEntity> list = dao.bestPhoncaseSeller();
+		for (ProductEntity pro : list) {
+			System.out.println(pro.getName());
+		}
+
+		// dao.bestPhoncaseSeller1();
 
 		/*
 		 * List<ProductEntity> products = productDAO.getListProduct(); for

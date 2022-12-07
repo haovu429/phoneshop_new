@@ -73,7 +73,7 @@
 							href="<%=request.getContextPath()%>/GetPhone">Home</a></li>
 						<li><a href="<%=request.getContextPath()%>/GetShopPage">Shop
 								page</a></li>
-						
+
 						<li class="active"><a
 							href="<%=request.getContextPath()%>/AddToCart">Cart</a></li>
 						<li><a href="<%=request.getContextPath()%>/Checkout">Checkout</a></li>
@@ -161,25 +161,25 @@
 											<tr class="cart_item">
 												<c:set var="k" value="${item}" />
 												<%-- <c:choose> --%>
-													<%-- <c:when test="${k.product.type == 'PHONE'}"> --%>
-														<td class="product-remove"><a
-															title="Remove this item" class="remove"
-															href="<%=request.getContextPath()%>/MainController?action=Remove&ID=${k.product.id}">Remove</a></td>
+												<%-- <c:when test="${k.product.type == 'PHONE'}"> --%>
+												<td class="product-remove"><a title="Remove this item"
+													class="remove"
+													href="<%=request.getContextPath()%>/MainController?action=Remove&ID=${k.product.id}">Remove</a></td>
 
-														<td class="product-thumbnail"><a
-															href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${k.product.id}"><img
-																width="145" height="145" alt="poster_1_up"
-																class="shop_thumbnail" src="${k.product.image}"></a></td>
+												<td class="product-thumbnail"><a
+													href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${k.product.id}"><img
+														width="145" height="145" alt="poster_1_up"
+														class="shop_thumbnail" src="${k.product.image}"></a></td>
 
-														<td class="product-name"><a
-															href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${k.product.id}">${k.product.name}</a></td>
+												<td class="product-name"><a
+													href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${k.product.id}">${k.product.name}</a></td>
 
-														<td class="product-price"><span class="amount">${k.product.cost}</span>
-														</td>
+												<td class="product-price"><span class="amount">${k.product.cost}</span>
+												</td>
 
-													<%-- </c:when>
+												<%-- </c:when>
 													<c:otherwise> --%>
-														<%-- <td class="product-remove"><a
+												<%-- <td class="product-remove"><a
 															title="Remove this item" class="remove"
 															href="<%=request.getContextPath()%>/MainController?action=RemovePhonecase&ID=${k.product.id}">Remove</a></td>
 
@@ -193,7 +193,7 @@
 
 														<td class="product-price"><span class="amount">${k.product.cost}</span>
 														</td> --%>
-													<%-- </c:otherwise>
+												<%-- </c:otherwise>
 
 												</c:choose> --%>
 												<td class="product-quantity">
@@ -228,7 +228,7 @@
 														class="button">
 												</div> <input type="submit" value="update" name="update_cart"
 												class="button">
-												
+
 											</td>
 										</tr>
 									</tbody>
@@ -240,8 +240,8 @@
 
 
 								<div class="cross-sells">
-
-										<h2>Phonecase</h2>
+									<c:if test="&{}"></c:if>
+									<h2>Phonecase</h2>
 
 									<ul class="products">
 										<c:forEach var="i" items="${PHONECASE_ACTIVE_PRODUCT_LIST}"
@@ -250,7 +250,7 @@
 												href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=${i.id}">
 													<img width="325" height="325" alt="T_4_front"
 													class="attachment-shop_catalog wp-post-image"
-													src="${i.image }">
+													src="${i.image}">
 													<h3>&nbsp;</h3> <span class="price"><span
 														class="amount"> </span></span>
 											</a> <a class="add_to_cart_button" data-quantity="1"
