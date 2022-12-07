@@ -240,11 +240,7 @@
 
 
 								<div class="cross-sells">
-<<<<<<< HEAD
-									<c:if test="&{}"></c:if>
-=======
 
->>>>>>> refs/remotes/origin/main
 									<h2>Phonecase</h2>
 
 									<ul class="products">
