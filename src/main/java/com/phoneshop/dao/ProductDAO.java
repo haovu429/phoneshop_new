@@ -217,17 +217,18 @@ public class ProductDAO {
 		return;
 	}
 
-	public List<ProductEntity> bestPhoncaseSeller() {
+	public List<ProductEntity> bestPhoncaseSeller(long phoneId) {
 		Transaction transaction = null;
 		List<ProductEntity> productList = null;
 		Session session = factory.openSession();
 		try {
 			transaction = session.beginTransaction();
 			Query<ProductEntity> query = session.createQuery(
-					"SELECT p FROM ProductEntity p WHERE p.id IN (SELECT product.id AS pid FROM ProductEntity product, DetailOrderEntity detail WHERE product.type = :product_type AND product.id = detail.productEntity.id GROUP BY product.id ORDER BY SUM(detail.quantity) DESC)",
+					"SELECT p FROM ProductEntity p WHERE p.phone.id = :phoneId AND p.id IN (SELECT product.id AS pid FROM ProductEntity product, DetailOrderEntity detail WHERE product.type = :product_type AND product.id = detail.productEntity.id GROUP BY product.id ORDER BY SUM(detail.quantity) DESC)",
 					ProductEntity.class);
 			query.setParameter("product_type", ProductType.PHONECASE);
-			query.setMaxResults(5);
+			query.setParameter("phoneId", phoneId);	
+			query.setMaxResults(1);
 			productList = query.list();
 			return productList;
 		} catch (Exception e) {
@@ -269,6 +270,7 @@ public class ProductDAO {
 		return null;
 	}
 
+
 	public static void main(String[] args) {
 
 		/*
@@ -284,14 +286,15 @@ public class ProductDAO {
 		 * ProductEntity("Red for Realme 8 Pro", 0, true); phoncase1.setPhone(phone1);
 		 * insertProduct(phoncase1);
 		 */
-		ProductDAO dao = new ProductDAO();
-
-		List<ProductEntity> list = dao.bestPhoncaseSeller();
-		for (ProductEntity pro : list) {
-			System.out.println(pro.getName());
-		}
+//		ProductDAO dao = new ProductDAO();
+//
+//		List<ProductEntity> list = dao.bestPhoncaseSeller();
+//		for (ProductEntity pro : list) {
+//			System.out.println(pro.getName());
+//		}
 
 		// dao.bestPhoncaseSeller1();
+
 
 		/*
 		 * List<ProductEntity> products = productDAO.getListProduct(); for

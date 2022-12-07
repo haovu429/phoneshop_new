@@ -240,7 +240,11 @@
 
 
 								<div class="cross-sells">
+<<<<<<< HEAD
 									<c:if test="&{}"></c:if>
+=======
+
+>>>>>>> refs/remotes/origin/main
 									<h2>Phonecase</h2>
 
 									<ul class="products">
@@ -251,6 +255,26 @@
 													<img width="325" height="325" alt="T_4_front"
 													class="attachment-shop_catalog wp-post-image"
 													src="${i.image}">
+													<h3>&nbsp;</h3> <span class="price"><span
+														class="amount"> </span></span>
+											</a> <a class="add_to_cart_button" data-quantity="1"
+												data-product_sku="" data-product_id="22" rel="nofollow"
+												href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=${i.id}">Select
+													options</a></li>
+										</c:forEach>
+										<a>&nbsp;</a>
+									</ul>
+
+									<h2>Best choice for Phonecase</h2>
+
+									<ul class="products">
+										<c:forEach var="i" items="${BEST_SELLER}"
+											begin='0' end='0'>
+											<li class="product"><a
+												href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=${i.id}">
+													<img width="325" height="325" alt="T_4_front"
+													class="attachment-shop_catalog wp-post-image"
+													src="${i.image }">
 													<h3>&nbsp;</h3> <span class="price"><span
 														class="amount"> </span></span>
 											</a> <a class="add_to_cart_button" data-quantity="1"

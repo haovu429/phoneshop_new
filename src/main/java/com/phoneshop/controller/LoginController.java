@@ -13,60 +13,44 @@ import javax.servlet.http.HttpSession;
 import com.phoneshop.users.UserDAO;
 import com.phoneshop.users.UserDTO;
 
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
+@WebServlet(name = "LoginController", urlPatterns = { "/LoginController" })
 public class LoginController extends HttpServlet {
-    private static final String ERROR = "login.html";
-    private static final String USER = "category.jsp";
-    private static final String ADMIN = "admin-product.jsp";
-    private static final String CHECKOUT = "checkout.jsp";
-    private static final int AD = 1;
-    private static final int US = 2;
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url = "login.html";
-        try {
-            String userID = request.getParameter("userID");
-            String password = request.getParameter("password");
-            
-            UserDAO dao = new UserDAO();
-            UserDTO loginUser = dao.checkLogin(userID, password);
-            
-            HttpSession session = request.getSession();
-            session.setAttribute("LOGIN_USER", loginUser);
-            
-            if (loginUser != null) {
-                    session.setAttribute("MESSAGE_ERROR", "Something wrong...");
-            }
-            else {
-                session.setAttribute("MESSAGE_ERROR", "Incorrect user ID or password!");
-            }
-        } 
-        catch (Exception e) {
-        }
-        finally {
-            response.sendRedirect(url);
-        }
-    }
+	private static final String ERROR = "404.html";
+	private static final String SUCCESS = "/admin/user.jsp";
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		String url = ERROR;
+		try {
+			String username = "admin";
+			String password = "admin";
 
+			if (username == "admin" && password == "admin") {
+				url = SUCCESS;
+			}
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+		} catch (Exception e) {
+		} finally {
+			response.sendRedirect(url);
+		}
+	}
 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		processRequest(request, response);
+	}
 
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	@Override
+	public String getServletInfo() {
+		return "Short description";
+	}
 
 }
