@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.phoneshop.shopping.LineItem;
+
 import lombok.*;
 
 @Getter
@@ -36,5 +38,11 @@ public class DetailOrderEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "order_id", nullable = false)
     private OrderEntity orderEntity;
+
+	public DetailOrderEntity(int quantity, ProductEntity productEntity) {
+		super();
+		this.quantity = quantity;
+		this.productEntity = productEntity;
+	}
     
 }

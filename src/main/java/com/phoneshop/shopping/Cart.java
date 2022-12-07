@@ -1,7 +1,9 @@
 package com.phoneshop.shopping;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,7 +37,7 @@ public class Cart {
 		calculateTotalPrice();
 	}
 
-	boolean existGlobal = false;
+
 
 	public void addItem(LineItem newLineItem) {
 		boolean exist = false;
@@ -78,6 +80,7 @@ public class Cart {
 	 */
 
 	public void removeItem(long phoneId) {
+		List<LineItem> listPhoncase = new ArrayList<>();
 		for (LineItem lineItem : lineItems) {
 			if (lineItem.getProduct() != null) {
 				if (lineItem.getProduct().getId() == phoneId) {
@@ -85,7 +88,8 @@ public class Cart {
 						for (LineItem lineItem2 : lineItems) {
 							ProductEntity phone = lineItem2.getProduct().getPhone();
 							if (phone != null && phone.getId() == lineItem.getProduct().getId()) {
-								removeItem(lineItem2.getProduct().getId());
+								//removeItem(lineItem2.getProduct().getId());
+								listPhoncase.add(lineItem2);
 							}
 						}
 					}
@@ -96,11 +100,13 @@ public class Cart {
 			}
 
 		}
+		System.out.println(listPhoncase.size());
+		lineItems.removeAll(listPhoncase);
 		calculateTotalPrice();
 	}
 
-	public void removePhoncasebyPhone() {
-
+	public void getAllCart() {
+		
 	}
 
 	/*

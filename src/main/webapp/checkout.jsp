@@ -115,11 +115,11 @@
 								<img src="${item.image}" class="recent-thumb" alt="">
 								<h2>
 									<a
-										href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item.ID}">${item.name}</a>
+										href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item.id}">${item.name}</a>
 								</h2>
 								<div class="product-carousel-price">
-									<ins>${item.price}</ins>
-									<del>${item.priceDel}</del>
+									<ins>${item.cost}</ins>
+									<del>${item.cost}</del>
 								</div>
 							</div>
 						</c:forEach>
@@ -131,7 +131,7 @@
 							<c:forEach var="item" items="${ACTIVE_PRODUCT_LIST}" begin='0'
 								end='5'>
 								<li><a
-									href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item.ID}">${item.name}</a></li>
+									href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item.id}">${item.name}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -177,7 +177,7 @@
 											<p id="billing_first_name_field"
 												class="form-row form-row-first validate-required">
 												<label class="" for="billing_first_name">First Name
-												</label> <input type="text" value="" placeholder=""
+												</label> <input type="text" placeholder=""
 													id="billing_first_name" name="billing_first_name"
 													required = ""
 													class="input-text ">
@@ -186,7 +186,7 @@
 											<p id="billing_last_name_field"
 												class="form-row form-row-last validate-required">
 												<label class="" for="billing_last_name">Last Name </label> <input
-													type="text" value="" placeholder="" id="billing_last_name"
+													type="text" placeholder="" id="billing_last_name"
 													name="billing_last_name"  required = "" class="input-text ">
 											</p>
 											<div class="clear"></div>
@@ -203,14 +203,14 @@
 											<p id="billing_email_field"
 												class="form-row form-row-first validate-required validate-email">
 												<label class="" for="billing_email">Email Address </label> <input
-													type="text" value="" placeholder="abc@example.com"
+													type="text"  placeholder="abc@example.com"
 													id="billing_email" name="billing_email" required = "" class="input-text ">
 											</p>
 
 											<p id="billing_phone_field"
 												class="form-row form-row-last validate-required validate-phone">
 												<label class="" for="billing_phone">Phone </label> <input
-													type="text" value="" placeholder="" id="billing_phone"
+													type="text" placeholder="" id="billing_phone"
 													name="billing_phone" class="input-text ">
 											</p>
 											<div class="clear"></div>
@@ -240,7 +240,7 @@
 												</thead>
 												<tbody>
 													<tr class="cart_item">
-														<td class="product-name">${item.phoneDTO.name}</td>
+														<td class="product-name">${item.product.name}</td>
 														<td class="product-total"><span class="amount">${item.subPrice}</span>
 														</td>
 													</tr>

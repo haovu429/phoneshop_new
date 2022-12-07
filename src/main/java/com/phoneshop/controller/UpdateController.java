@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
+import com.phoneshop.dao.ProductDAO;
+import com.phoneshop.entities.ProductEntity;
+import com.phoneshop.enums.ProductType;
 import com.phoneshop.phones.PhoneDAO;
 import com.phoneshop.phones.PhoneDTO;
 import com.phoneshop.shopping.Cart;
@@ -57,8 +60,8 @@ public class UpdateController extends HttpServlet {
 			String action = request.getParameter("action");
 			HttpSession session = request.getSession();
 			Cart cart = (Cart) session.getAttribute("CART");
-			PhoneDAO dao = new PhoneDAO();
-			List<PhoneDTO> productList = dao.getAllPhone();
+			ProductDAO dao = new ProductDAO();
+			List<ProductEntity> productList = dao.getListProductByType(ProductType.PHONE);
 			if (!productList.isEmpty()) {
 				request.setAttribute("ACTIVE_PRODUCT_LIST", productList);
 			}

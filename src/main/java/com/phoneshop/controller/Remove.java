@@ -47,23 +47,18 @@ public class Remove extends HttpServlet {
         String url = ERROR;
         try {
             String ID = request.getParameter("ID");
-            int quantity = 1;
             
-            PhoneDAO dao = new PhoneDAO();
-            PhoneDTO phone = dao.getProductForCart(ID);
+            HttpSession session = request.getSession();
+            Cart cart = (Cart) session.getAttribute("CART");
+             
+            cart.removeItem(Long.parseLong(ID));
             
-//            LineItem lineItem = new LineItem(phone, quantity);
-//            
-//            HttpSession session = request.getSession();
-//            Cart cart = (Cart) session.getAttribute("CART");
-//             
-//            cart.removeItem(lineItem);
-//            
-//            session.setAttribute("CART", cart);
-//            url = SUCCESS;
+            session.setAttribute("CART", cart);
+            url = SUCCESS;
             
         } 
         catch (Exception e) {
+        	e.printStackTrace();
         }
         finally {
             request.getRequestDispatcher(url).forward(request, response);

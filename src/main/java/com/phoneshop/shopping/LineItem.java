@@ -15,7 +15,6 @@ public class LineItem {
 	 */
 	private ProductEntity product;
 	private int quantity;
-	private int pcquantity;
 	private long subPrice = 0;
 
 	/*

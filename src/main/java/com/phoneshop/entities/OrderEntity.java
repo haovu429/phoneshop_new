@@ -19,8 +19,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.phoneshop.shopping.Cart;
 
 import lombok.*;
 
@@ -70,5 +74,13 @@ public class OrderEntity {
     
     @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<DetailOrderEntity> detailOrderEntities = new ArrayList<>();
-
+    
+    public OrderEntity(String name, String address, String phone) {
+		super();
+		this.fullName = name;
+		this.address = address;
+		this.phone = phone;
+		
+	}
+    
 }

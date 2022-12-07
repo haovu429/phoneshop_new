@@ -28,73 +28,79 @@ import com.phoneshop.shopping.LineItem;
 @WebServlet("/AddToCart")
 public class AddToCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final String ERROR = "/404.html";
-    private static final String SUCCESS = "/cart.jsp";
-    
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddToCart() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private static final String SUCCESS = "/cart.jsp";
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AddToCart() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		// String url = SUCCESS;
+		// response.sendRedirect(url);
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
-        String url = "/cart.jsp";
-        try {
-            String ID = request.getParameter("ID");
-            String productType = request.getParameter("type");
-            ProductDAO dao = new ProductDAO();
+		String url = "/cart.jsp";
+
+		try {
+			String action = request.getParameter("action");
+			String ID = request.getParameter("ID");
+			String productType = request.getParameter("type");
+			
+			ProductDAO dao = new ProductDAO();
 			List<ProductEntity> productList = dao.getListProductByType(ProductType.PHONE);
 			ProductEntity phone = dao.getProductById(Long.valueOf(ID));
 
-            if (!productList.isEmpty()) {             
-                request.setAttribute("ACTIVE_PRODUCT_LIST", productList);
-                }
-            
-            
-            if (!ID.equals("0")) {
-            	int quantity = 1;
-                LineItem lineItem = new LineItem(phone, quantity);
-                
-                HttpSession session = request.getSession();
-                Cart cart = (Cart) session.getAttribute("CART");
-                if (cart == null) {
-                	cart = new Cart();
-                }
-      
-                cart.addItem(lineItem);
-                
-                List<ProductEntity> phonecaseList = dao.getListProductByTypeWithPhoneId(ProductType.PHONECASE, phone.getId());
-                
-                
-                
-                request.setAttribute("PHONECASE_ACTIVE_PRODUCT_LIST", phonecaseList);
-                session.setAttribute("CART", cart);
-                url = SUCCESS;
+			if (!productList.isEmpty()) {
+				request.setAttribute("ACTIVE_PRODUCT_LIST", productList);
 			}
 
-        } 
-        catch (Exception e) {
-        }
-        finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
+			if (!ID.equals("0")) {
+				int quantity = 1;
+				LineItem lineItem = new LineItem(phone, quantity);
+
+				HttpSession session = request.getSession();
+				Cart cart = (Cart) session.getAttribute("CART");
+				if (cart == null) {
+					cart = new Cart();
+				}
+
+				cart.addItem(lineItem);
+
+				List<ProductEntity> phonecaseList = dao.getListProductByTypeWithPhoneId(ProductType.PHONECASE,
+						phone.getId());
+
+				request.setAttribute("PHONECASE_ACTIVE_PRODUCT_LIST", phonecaseList);
+				session.setAttribute("CART", cart);
+				url = SUCCESS;
+
+			}
+
+		} catch (Exception e) {
+		} finally {
+			// response.sendRedirect(request.getContextPath() + url);
+			request.getRequestDispatcher(url).forward(request, response);
+		}
 	}
 
 }
