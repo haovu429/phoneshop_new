@@ -42,6 +42,20 @@
     <![endif]-->
 </head>
 <body>
+	<div class="header-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="user-menu">
+						<ul>
+							<li><a href="#"><i class="fa fa-user"></i> Login (Admin
+									Only)</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<div class="site-branding-area">
@@ -72,8 +86,10 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="<%=request.getContextPath()%>/GetPhone">Home</a></li>
-						<li><a href="<%=request.getContextPath()%>/GetShopPage">Shop page</a></li>
+						<li class="active"><a
+							href="<%=request.getContextPath()%>/GetPhone">Home</a></li>
+						<li><a href="<%=request.getContextPath()%>/GetShopPage">Shop
+								page</a></li>
 						<li><a href="<%=request.getContextPath()%>/AddToCart">Cart</a></li>
 						<li><a href="<%=request.getContextPath()%>/Checkout">Checkout</a></li>
 
@@ -94,8 +110,9 @@
 							Realme <span class="primary">8 <strong>Pro</strong></span>
 						</h2>
 						<h4 class="caption subtitle">Dare To Leap.</h4>
-						<a class="caption button-radius" href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=1"><span class="icon"></span>Shop
-							now</a>
+						<a class="caption button-radius"
+							href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=1"><span
+							class="icon"></span>Shop now</a>
 					</div></li>
 				<li><img src="img/h4-slide2.png" alt="Slide">
 					<div class="caption-group">
@@ -112,8 +129,9 @@
 							Nokia <span class="primary">G50 <strong>5G</strong></span>
 						</h2>
 						<h4 class="caption subtitle">Alive every experience.</h4>
-						<a class="caption button-radius" href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=3"><span class="icon"></span>Shop
-							now</a>
+						<a class="caption button-radius"
+							href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=3"><span
+							class="icon"></span>Shop now</a>
 					</div></li>
 				<li><img src="img/h4-slide4.png" alt="Slide">
 					<div class="caption-group">
@@ -121,8 +139,9 @@
 							Oppo <span class="primary">Reno8 <strong>5G</strong></span>
 						</h2>
 						<h4 class="caption subtitle">Portrait specialist.</h4>
-						<a class="caption button-radius" href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=2"><span class="icon"></span>Shop
-							now</a>
+						<a class="caption button-radius"
+							href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=2"><span
+							class="icon"></span>Shop now</a>
 					</div></li>
 			</ul>
 		</div>
@@ -176,15 +195,19 @@
 									<div class="product-f-image">
 										<img src="${c.image}" alt="">
 										<div class="product-hover">
-											<a href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=${c.ID}" class="add-to-cart-link"><i
-												class="fa fa-shopping-cart"></i> Add to cart</a> <a
-												href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${c.ID}" class="view-details-link"><i
-												class="fa fa-link"></i> See details</a>
+											<a
+												href="<%=request.getContextPath()%>/MainController?action=AddToCart&ID=${c.ID}"
+												class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>
+												Add to cart</a> <a
+												href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${c.ID}"
+												class="view-details-link"><i class="fa fa-link"></i> See
+												details</a>
 										</div>
 									</div>
 
 									<h2>
-										<a href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${c.ID}">${c.name}</a>
+										<a
+											href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${c.ID}">${c.name}</a>
 									</h2>
 
 									<div class="product-carousel-price">
@@ -234,10 +257,13 @@
 						<c:forEach var="item1" items="${ACTIVE_PRODUCT_LIST}" begin='0'
 							end='2'>
 							<div class="single-wid-product">
-								<a href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item1.ID}"><img src="${item1.image}"
-									height=190px width=190px alt="" class="product-thumb"></a>
+								<a
+									href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item1.ID}"><img
+									src="${item1.image}" height=190px width=190px alt=""
+									class="product-thumb"></a>
 								<h2>
-									<a href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item1.ID}">${item1.name}</a>
+									<a
+										href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item1.ID}">${item1.name}</a>
 								</h2>
 								<div class="product-wid-rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -260,10 +286,13 @@
 						<c:forEach var="item2" items="${ACTIVE_PRODUCT_LIST}" begin='3'
 							end='5'>
 							<div class="single-wid-product">
-								<a href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item2.ID}"><img src="${item2.image}"
-									height=190px width=190px alt="" class="product-thumb"></a>
+								<a
+									href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item2.ID}"><img
+									src="${item2.image}" height=190px width=190px alt=""
+									class="product-thumb"></a>
 								<h2>
-									<a href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item2.ID}">${item2.name}</a>
+									<a
+										href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item2.ID}">${item2.name}</a>
 								</h2>
 								<div class="product-wid-rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -285,10 +314,13 @@
 						<c:forEach var="item3" items="${ACTIVE_PRODUCT_LIST}" begin='6'
 							end='8'>
 							<div class="single-wid-product">
-								<a href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item3.ID}"><img src="${item3.image}"
-									height=190px width=190px alt="" class="product-thumb"></a>
+								<a
+									href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item3.ID}"><img
+									src="${item3.image}" height=190px width=190px alt=""
+									class="product-thumb"></a>
 								<h2>
-									<a href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item3.ID}">${item3.name}</a>
+									<a
+										href="<%=request.getContextPath()%>/MainController?action=GetDetail&ID=${item3.ID}">${item3.name}</a>
 								</h2>
 								<div class="product-wid-rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
