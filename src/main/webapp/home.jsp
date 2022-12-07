@@ -48,8 +48,8 @@
 				<div class="col-md-8">
 					<div class="user-menu">
 						<ul>
-							<li><a href="#"><i class="fa fa-user"></i> Login (Admin
-									Only)</a></li>
+							<li><a href="<%=request.getContextPath()%>/admin/login.jsp"><i
+									class="fa fa-user"></i> Login (Admin Only)</a></li>
 						</ul>
 					</div>
 				</div>
