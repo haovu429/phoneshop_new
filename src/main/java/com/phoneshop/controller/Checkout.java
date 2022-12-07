@@ -56,6 +56,8 @@ public class Checkout extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String url = "/checkout.jsp";
 
 		try {
@@ -72,7 +74,12 @@ public class Checkout extends HttpServlet {
 				String email = request.getParameter("billing_email"); 
 				String phone = request.getParameter("billing_phone");
 				 
-
+				System.out.println("FName: " + fname);
+				System.out.println("LName: "+ lname);
+				System.out.println("Address: " + address);
+				System.out.println("Email: " + email);
+				System.out.println("Phone: " + phone);
+				
 				/*
 				 * String fname = "Ngan"; String lname = "Phan"; String address = "An Giang";
 				 * String email = "19110096@student.hcmute.edu.vn"; String phone = "0964307703";

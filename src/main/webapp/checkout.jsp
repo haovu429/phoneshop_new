@@ -166,7 +166,7 @@
 								<div class="clear"></div>
 							</form>
 
-							<form enctype="multipart/form-data" action="<%=request.getContextPath()%>/Checkout?action=checkout" class="checkout"
+							<form action="<%=request.getContextPath()%>/Checkout?action=checkout" class="checkout"
 								method="post" name="checkout">
 
 								<div id="customer_details" class="col2-set">
