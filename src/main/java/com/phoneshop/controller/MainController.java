@@ -16,6 +16,8 @@ public class MainController extends HttpServlet {
     private static final String LOGIN = "LoginController";
     private static final String GET_LIST_PHONE = "GetPhone";
     private static final String GET_SHOP_PAGE = "GetShopPage";
+    private static final String GET_SHOP_PAGE2 = "GetShopPage2";
+    private static final String GET_SHOP_PAGE3 = "GetShopPage3";
     private static final String GET_DETAIL = "GetDetail";
     private static final String GET_TYPE = "GetTypeController";
     private static final String ADD_TO_CART = "AddToCart";
@@ -45,7 +47,13 @@ public class MainController extends HttpServlet {
             }    
             else if ("GetShopPage".equals(action)) {
                 url = GET_SHOP_PAGE;
-            }    
+            }
+            else if ("GetShopPage2".equals(action)) {
+                url = GET_SHOP_PAGE2;
+            }
+            else if ("GetShopPage3".equals(action)) {
+                url = GET_SHOP_PAGE3;
+            }
             else if ("GetDetail".equals(action)) {
                 url = GET_DETAIL;
             }    

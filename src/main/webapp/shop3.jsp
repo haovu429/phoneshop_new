@@ -97,7 +97,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
-					<c:forEach var="item1" items="${ACTIVE_PRODUCT_LIST}" begin='0' end='2'>
+					<c:forEach var="item1" items="${ACTIVE_PRODUCT_LIST}" begin='24' end='26'>
 						<div class="single-shop-product">
 							<div class="product-upper">
 								<img src="${item1.image}" alt="">
@@ -119,7 +119,7 @@
 					</c:forEach>
 				</div>
 				<div class="col-md-3 col-sm-6">
-					<c:forEach var="item2" items="${ACTIVE_PRODUCT_LIST}" begin='3' end='5'>
+					<c:forEach var="item2" items="${ACTIVE_PRODUCT_LIST}" begin='27' end='29'>
 						<div class="single-shop-product">
 							<div class="product-upper">
 								<img src="${item2.image}" alt="">
@@ -141,7 +141,7 @@
 					</c:forEach>
 				</div>
 				<div class="col-md-3 col-sm-6">
-					<c:forEach var="item3" items="${ACTIVE_PRODUCT_LIST}" begin='6' end='8'>
+					<c:forEach var="item3" items="${ACTIVE_PRODUCT_LIST}" begin='30' end='32'>
 						<div class="single-shop-product">
 							<div class="product-upper">
 								<img src="${item3.image}" alt="">
@@ -163,7 +163,7 @@
 					</c:forEach>
 				</div>
 				<div class="col-md-3 col-sm-6">
-					<c:forEach var="item4" items="${ACTIVE_PRODUCT_LIST}" begin='9' end='11'>
+					<c:forEach var="item4" items="${ACTIVE_PRODUCT_LIST}" begin='33' end='35'>
 						<div class="single-shop-product">
 							<div class="product-upper">
 								<img src="${item4.image}" alt="">
