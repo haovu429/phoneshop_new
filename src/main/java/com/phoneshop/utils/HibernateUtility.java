@@ -30,14 +30,16 @@ public class HibernateUtility {
 				String password = "53GSlMwjIy";
 				
 				String urlMySQL = "jdbc:mysql://" + hostname + ":" + port + "/" + database;
-				
+				String clearDB= "jdbc:mysql://us-cdbr-east-06.cleardb.net:3306/heroku_cc2f53c9dac9add";
+				String userClearDB = "bb6ba7192d4a4a";
+				String passwordClearDB = "5610e378";
 
 				// Hibernate settings equivalent to hibernate.cfg.xml's properties
 				Properties settings = new Properties();
 				settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-				settings.put(Environment.URL, urlMySQL);
-				settings.put(Environment.USER, user);
-				settings.put(Environment.PASS, password);
+				settings.put(Environment.URL, clearDB);
+				settings.put(Environment.USER, userClearDB);
+				settings.put(Environment.PASS, passwordClearDB);
 				// https://stackoverflow.com/questions/43716068/invalid-syntax-error-type-myisam-in-ddl-generated-by-hibernate
 				// Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version
 				// for the right syntax to use near 'type=MyISAM' at line 1

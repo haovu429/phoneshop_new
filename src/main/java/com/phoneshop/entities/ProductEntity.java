@@ -92,7 +92,7 @@ public class ProductEntity {
 
 	@OneToMany(mappedBy = "phone", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<ProductEntity> phonCases; // Sản phẩm này (Phone) có thể sử dụng phone case nào
+	private List<ProductEntity> phoneCases; // Sản phẩm này (Phone) có thể sử dụng phone case nào
 	
 	public ProductEntity (PhoneDTO product) throws Exception {
 		SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");

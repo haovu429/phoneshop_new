@@ -59,7 +59,7 @@ public class Checkout extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String url = "/checkout.jsp";
-
+		boolean return_checkout = true;
 		try {
 			HttpSession session = request.getSession();
 			Cart cart = (Cart) session.getAttribute("CART");
@@ -67,7 +67,7 @@ public class Checkout extends HttpServlet {
 			String action = request.getParameter("action");
 			if (action != null && action.equals("checkout")) {
 
-				
+
 				String fname = request.getParameter("billing_first_name"); 
 				String lname = request.getParameter("billing_last_name"); 
 				String address = request.getParameter("billing_address_1"); 
@@ -112,10 +112,21 @@ public class Checkout extends HttpServlet {
 				request.setAttribute("ACTIVE_PRODUCT_LIST", productList);
 			}
 			url = SUCCESS;
+
+			String method = request.getParameter("payment_method");
+			//request.setAttribute("baseURL",request.getContextPath());
+			if (method.equals("paypal")) {
+				request.setAttribute("totalPrice", cart.getTotalPrice());
+				request.getRequestDispatcher("/vnpay_jsp/index.jsp").forward(request, response);
+				//response.sendRedirect(request.getContextPath() + "/vnpay_jsp/index.jsp");
+				return_checkout = false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			request.getRequestDispatcher(url).forward(request, response);
+			if (return_checkout) {
+				request.getRequestDispatcher(url).forward(request, response);
+			}
 		}
 	}
 
